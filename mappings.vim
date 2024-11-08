@@ -12,15 +12,31 @@ if bufwinnr(1)
   map - <C-W>-
 endif
 
-nnoremap ,sv :source ~/AppData/Local/nvim/init.vim
-nnoremap ,esv :edit ~/AppData/Local/nvim/init.vim
+nnoremap ,sv :source ~/AppData/Local/nvim/init.vim<CR>
+nnoremap ,esv :edit ~/AppData/Local/nvim/init.vim<CR>
 
-:map <C-n> :NERDTreeToggle<CR>
-:map <C-p> :GFiles<CR>
-:map <C-f> :Files<CR>
+function! NERDTreeFindCurr()
+    if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
+        exe ":NERDTreeClose"
+    else
+        if (expand("%") == "")
+            exe ":NERDTree"
+        else
+            exe ":NERDTreeFind"
+        endif
+    endif
+endfunction
+
+":map <C-n> :NERDTreeToggle<CR>
+map <CM-> :NERDTree<CR>
+map <C-p> :GFiles<CR>
+map <C-f> :Files<CR>
+map <C-b> :Buffers<CR>
+nmap <silent> <C-n> :call NERDTreeFindCurr()<CR>
+autocmd 
 
 "collapse json files by themselves.
-:map <C-j> :set filetype=json \| :syntax on \| :set foldmethod=syntax
+map <C-j> :set filetype=json \| :syntax on \| :set foldmethod=syntax
 "zo for open
 "zc for close
 
@@ -31,3 +47,16 @@ map <C-t><up> :tabr<cr>
 map <C-t><down> :tabl<cr>
 map <C-t><left> :tabp<cr>
 map <C-t><right> :tabn<cr>
+
+" Supprot for different goto definitions for different file types.
+autocmd FileType cs nmap <silent> gd :OmniSharpGotoDefinition<CR>
+autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
+autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
+
+autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
+autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
+
+tnoremap <C-q> <C-\><C-n>
+noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
+

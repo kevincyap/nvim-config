@@ -22,17 +22,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'valloric/MatchTagAlways'
 Plug 'jiangmiao/auto-pairs'
+
 call plug#end()
-
-" Supprot for different goto definitions for different file types.
-autocmd FileType cs nmap <silent> gd :OmniSharpGotoDefinition<CR>
-autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
-autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
-
-autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
-autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
-
 
 " The following commands are contextual, based on the cursor position.
 " autocmd FileType cs nnoremap <buffer>
@@ -115,3 +106,4 @@ let g:ale_linters = {
 
 :source ~/AppData/Local/nvim/mappings.vim
 :source ~/AppData/Local/nvim/options.vim
+:luafile ~/AppData/Local/nvim/luastuff.lua
