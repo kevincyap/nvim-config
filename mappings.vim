@@ -12,7 +12,7 @@ if bufwinnr(1)
   map - <C-W>-
 endif
 
-nnoremap ,sv :source ~/AppData/Local/nvim/init.vim<CR>
+nnoremap ,sv <silent>:source ~/AppData/Local/nvim/init.vim<CR>
 nnoremap ,esv :edit ~/AppData/Local/nvim/init.vim<CR>
 
 function! NERDTreeFindCurr()
@@ -28,7 +28,6 @@ function! NERDTreeFindCurr()
 endfunction
 
 ":map <C-n> :NERDTreeToggle<CR>
-map <CM-> :NERDTree<CR>
 map <C-p> :GFiles<CR>
 map <C-f> :Files<CR>
 map <C-b> :Buffers<CR>
@@ -60,3 +59,4 @@ autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR
 tnoremap <C-q> <C-\><C-n>
 noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
 
+nnoremap <CM-t> (:ToggleTerm size=40 direction=float name=main)<CR>

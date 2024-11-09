@@ -6,7 +6,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('C:\repos\.vim\plugged')
 Plug 'preservim/nerdtree'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'flazz/vim-colorschemes'
@@ -23,8 +23,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'valloric/MatchTagAlways'
 Plug 'jiangmiao/auto-pairs'
 
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
 call plug#end()
 
+lua require("toggleterm").setup()
 " The following commands are contextual, based on the cursor position.
 " autocmd FileType cs nnoremap <buffer>
 " autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
@@ -50,7 +53,7 @@ set directory^=$HOME/tempswap//
 
 " This directory should exist.
 " Always enable preview window on the right with 60% width
-let g:fzf_preview_window = 'right:60%'
+let g:fzf_preview_window = 'right:50%'
 
 " vim wiki settings.
 set nocompatible
@@ -68,8 +71,6 @@ if executable('ag')
 "   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 " ctrl+p when you move to a file this highlights it.
-let g:nerdtree_sync_cursorline = 1
-
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>

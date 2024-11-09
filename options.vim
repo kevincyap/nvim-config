@@ -8,3 +8,7 @@
 :set expandtab
 :set nowrap
 :set ignorecase
+
+let g:nerdtree_sync_cursorline = 1
+let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeWinSize=45
