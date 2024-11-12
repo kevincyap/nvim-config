@@ -6,7 +6,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('C:\repos\.vim\plugged')
+call plug#begin()
 Plug 'preservim/nerdtree'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'flazz/vim-colorschemes'
@@ -27,7 +27,6 @@ Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
 call plug#end()
 
-lua require("toggleterm").setup()
 " The following commands are contextual, based on the cursor position.
 " autocmd FileType cs nnoremap <buffer>
 " autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
@@ -36,7 +35,7 @@ let g:airline_powerline_fonts=1
 let g:tmuxline_powerline_separators = 0
 " set background=dark
 "colorscheme Monokai
-colorscheme minimalist
+colorscheme gruvbox
 let g:airline_theme='minimalist'
 
 set encoding=utf-8

@@ -35,7 +35,7 @@ nmap <silent> <C-n> :call NERDTreeFindCurr()<CR>
 autocmd 
 
 "collapse json files by themselves.
-map <C-j> :set filetype=json \| :syntax on \| :set foldmethod=syntax
+"map <C-j> :set filetype=json \| :syntax on \| :set foldmethod=syntax
 "zo for open
 "zc for close
 
@@ -49,15 +49,18 @@ map <C-t><right> :tabn<cr>
 
 " Supprot for different goto definitions for different file types.
 autocmd FileType cs nmap <silent> gd :OmniSharpGotoDefinition<CR>
-autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
-autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
+autocmd FileType cs nnoremap <buffer> ,fu :OmniSharpFindUsages<CR>
+autocmd FileType cs nnoremap <buffer> ,fi :OmniSharpFindImplementations<CR>
+autocmd FileType cs nnoremap ,<Space> :OmniSharpGetCodeActions<CR>
 
 autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 
-tnoremap <C-q> <C-\><C-n>
-tmap <CM-q> <C-\><C-n><CM-q>
-noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
+tnoremap <Esc> <C-\><C-n>
+"tmap <CM-q> <C-\><C-n><C-q>
+"noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
 
-nnoremap <CM-q> (:ToggleTerm size=40 direction=float name=main)<CR>
+nnoremap <F1> (:1ToggleTerm size=40 direction=float name=main)<CR>
+nnoremap <F2> (:1ToggleTerm size=40 direction=horizontal name=main)<CR>
+nnoremap <F3> (:2ToggleTerm size=40 direction=horizontal name=vs)<CR>
+command! -count=1 TermVS  lua require'toggleterm'.exec("cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64", <count>,40, "", "float", "vs", false,false)
