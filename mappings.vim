@@ -61,6 +61,5 @@ tnoremap <Esc> <C-\><C-n>
 "noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
 
 nnoremap <F1> (:1ToggleTerm size=40 direction=float name=main)<CR>
-nnoremap <F2> (:1ToggleTerm size=40 direction=horizontal name=main)<CR>
-nnoremap <F3> (:2ToggleTerm size=40 direction=horizontal name=vs)<CR>
+nnoremap <F3> (:2ToggleTerm size=40 direction=float name=vs)<CR>
 command! -count=1 TermVS  lua require'toggleterm'.exec("cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64", <count>,40, "", "float", "vs", false,false)
