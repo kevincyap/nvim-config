@@ -57,9 +57,12 @@ autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 
 tnoremap <C-q> <C-\><C-n>
+tnoremap <CM-q> <C-\><C-n><C-w>q
 "tmap <CM-q> <C-\><C-n><C-q>
 "noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
 
 nnoremap <F1> (:1ToggleTerm size=40 direction=float name=main)<CR>
+tnoremap <F1> <C-\><C-n>(:1ToggleTerm size=40 direction=float name=main)<CR>
 nnoremap <F3> (:2ToggleTerm size=40 direction=float name=vs)<CR>
-command! -count=1 TermVS  lua require'toggleterm'.exec("cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64", <count>,40, "", "float", "vs", false,false)
+tnoremap <F3> <C-\><C-n>(:2ToggleTerm size=40 direction=float name=vs)<CR>
+command! -count=2 TermVS  lua require'toggleterm'.exec("cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64", <count>,40, "", "float", "vs", false,false)
