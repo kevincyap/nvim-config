@@ -56,7 +56,7 @@ autocmd FileType cs nnoremap ,<Space> :OmniSharpGetCodeActions<CR>
 autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 
-tnoremap <Esc> <C-\><C-n>
+tnoremap <C-q> <C-\><C-n>
 "tmap <CM-q> <C-\><C-n><C-q>
 "noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
 
