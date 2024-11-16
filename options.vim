@@ -8,6 +8,7 @@
 :set expandtab
 :set nowrap
 :set ignorecase
+:set so=10
 
 let g:nerdtree_sync_cursorline = 1
 let g:NERDTreeQuitOnOpen=1

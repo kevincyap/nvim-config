@@ -25,6 +25,13 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
+Plug 'github/copilot.vim'
+
+Plug 'folke/tokyonight.nvim'
+Plug 'sindrets/diffview.nvim'
+
+Plug 'nvim-tree/nvim-web-devicons'
+
 call plug#end()
 
 " The following commands are contextual, based on the cursor position.
