@@ -33,6 +33,8 @@ Plug 'sindrets/diffview.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'folke/neodev.nvim'
+
 call plug#end()
 
 " The following commands are contextual, based on the cursor position.
@@ -43,7 +45,7 @@ let g:airline_powerline_fonts=1
 let g:tmuxline_powerline_separators = 0
 " set background=dark
 "colorscheme Monokai
-colorscheme gruvbox
+colorscheme minimalist
 let g:airline_theme='minimalist'
 
 set encoding=utf-8
@@ -115,3 +117,6 @@ let g:ale_linters = {
 :source ~/AppData/Local/nvim/mappings.vim
 :source ~/AppData/Local/nvim/options.vim
 :luafile ~/AppData/Local/nvim/luastuff.lua
+
+command! -count=2 TermVS  lua require'toggleterm'.exec("cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64", <count>,40, "", "float", "vs", false,false)
+:2TermVS

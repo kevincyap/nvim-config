@@ -8,7 +8,7 @@ nmap <C-L><C-L> :set norelativenumber<CR>
 map  <C-R><C-L> :set relativenumber<CR>
 
 if bufwinnr(1)
-  map + <C-W>+
+  map + <C-W>f+
   map - <C-W>-
 endif
 
@@ -34,6 +34,8 @@ endfunction
 map <C-p> :GFiles<CR>
 map <C-f> :Files<CR>
 map <C-b> :Buffers<CR>
+map <C-l> :BLines<CR>
+map <CA-A> :Ag<CR>
 nmap <silent> <C-n> :call NERDTreeFindCurr()<CR>
 autocmd 
 
@@ -49,6 +51,10 @@ map <C-t><up> :tabr<cr>
 map <C-t><down> :tabl<cr>
 map <C-t><left> :tabp<cr>
 map <C-t><right> :tabn<cr>
+
+nmap <A-d> "_dd
+nmap <CA-u> <C-d>zz
+nmap <C-u> <C-u>zz
 
 map <A-l> zL
 map <A-h> zH
@@ -75,9 +81,7 @@ tnoremap <F3> <C-\><C-n>(:2ToggleTerm size=40 direction=float name=vs)<CR>
 nnoremap <F5> :DiffviewOpen<CR>
 nnoremap <C-F5> :DiffviewClose<CR>
 nnoremap <A-F5> :DiffviewToggleFiles<CR>
-command! -count=2 TermVS  lua require'toggleterm'.exec("cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64", <count>,40, "", "float", "vs", false,false)
 nnoremap ,/ :set wrap!<CR>
 
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
-
