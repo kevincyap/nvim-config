@@ -31,6 +31,7 @@ Plug 'folke/tokyonight.nvim'
 Plug 'sindrets/diffview.nvim'
 
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 

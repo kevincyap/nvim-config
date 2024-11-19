@@ -13,7 +13,10 @@ if bufwinnr(1)
 endif
 
 nnoremap ,sv :source ~/AppData/Local/nvim/init.vim<CR>
-nnoremap ,esv :edit ~/AppData/Local/nvim/init.vim<CR>
+nnoremap ,nvim :cd ~/AppData/Local/nvim/<CR>
+
+nnoremap ,dbj :cd C:/repos/DBJobPackage<CR>
+nnoremap ,gridmgr :cd Q:\src\GridMgr<CR>
 
 function! NERDTreeFindCurr()
     if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
@@ -71,6 +74,7 @@ nnoremap <F3> (:2ToggleTerm size=40 direction=float name=vs)<CR>
 tnoremap <F3> <C-\><C-n>(:2ToggleTerm size=40 direction=float name=vs)<CR>
 nnoremap <F5> :DiffviewOpen<CR>
 nnoremap <C-F5> :DiffviewClose<CR>
+nnoremap <A-F5> :DiffviewToggleFiles<CR>
 command! -count=2 TermVS  lua require'toggleterm'.exec("cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64", <count>,40, "", "float", "vs", false,false)
 nnoremap ,/ :set wrap!<CR>
 
