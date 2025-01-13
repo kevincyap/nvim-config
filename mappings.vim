@@ -17,7 +17,7 @@ nnoremap ,nvim :cd ~/AppData/Local/nvim/<CR>
 
 nnoremap ,dbj :cd C:/repos/DBJobPackage<CR>
 nnoremap ,gridmgr :cd Q:\src\GridMgr<CR>
-
+nnoremap ,active :cd Q:\src\ActiveActive<CR>
 function! NERDTreeFindCurr()
     if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
         exe ":NERDTreeClose"
@@ -30,10 +30,48 @@ function! NERDTreeFindCurr()
     endif
 endfunction
 
+function! s:buffers_delete(lines)
+    normal! m'
+    if len(a:lines) < 2
+        return
+    endif
+    let action = a:lines[1]
+    let buf=split(a:lines[2])[0]
+    let bufname=split(buf, ':')[0]
+    if action ==? ''
+        execute 'buffer '.bufname
+    endif
+    if action ==? 'ctrl-x'
+        execute 'bdelete '.bufname
+    endif
+    return
+endfunction
+
+function! s:myfzfbuffers(query, fullscreen)
+    " let spec = { 'source': s:buffers_list(),
+    "             \ 'sink*': { lines -> s:buffers_delete(lines) },
+    "             \ 'options': [
+    "             \   '--print-query',
+    "             \   '--header', close_buffer_header,
+    "             \   '--prompt', 'Buffer> '
+    "             \ ]}
+    " call fzf#run(fzf#wrap('buffers', fzf#vim#with_preview(spec), a:fullscreen))
+    let spec = { 'sink*': { lines -> s:buffers_delete(lines) },
+                \ 'options': [
+                \   '--print-query',
+                \   '--prompt', 'Buffer> '
+                \ ],
+                \ 'placeholder': '{1}'
+                \ }
+    call fzf#vim#buffers(a:query, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+
+command! -bar -bang -nargs=? -complete=dir MyFzfBuffers call s:myfzfbuffers(<q-args>, <bang>0)
 ":map <C-n> :NERDTreeToggle<CR>
 map <C-p> :GFiles<CR>
 map <C-f> :Files<CR>
-map <C-b> :Buffers<CR>
+map <C-b> :MyFzfBuffers<CR>
 map <C-l> :BLines<CR>
 map <CA-A> :Ag<CR>
 nmap <silent> <C-n> :call NERDTreeFindCurr()<CR>
@@ -60,28 +98,18 @@ map <A-l> zL
 map <A-h> zH
 nnoremap <A-{> :lprevious<cr>
 nnoremap <A-}> :lnext<cr>
+nnoremap <CA-{> [{
+nnoremap <CA-}> ]}
 
 " Supprot for different goto definitions for different file types.
 autocmd FileType cs nmap <silent> gd :OmniSharpGotoDefinition<CR>
-autocmd FileType cs nnoremap <buffer> ,fu :OmniSharpFindUsages<CR>
-autocmd FileType cs nnoremap <buffer> ,fi :OmniSharpFindImplementations<CR>
+autocmd FileType cs nnoremap ,fu :OmniSharpFindUsages<CR>
+autocmd FileType cs nnoremap ,fi :OmniSharpFindImplementations<CR>
 autocmd FileType cs nnoremap ,<Space> :OmniSharpGetCodeActions<CR>
+autocmd FileType cs nnoremap ,fm :OmniSharpFindMembers<CR>
 
 autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 
-tnoremap <C-q> <C-\><C-n>
-tnoremap <CM-q> <C-\><C-n><C-w>q
 "tmap <CM-q> <C-\><C-n><C-q>
 "noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
-nnoremap <F1> (:1ToggleTerm size=40 direction=float name=main)<CR>
-tnoremap <F1> <C-\><C-n>(:1ToggleTerm size=40 direction=float name=main)<CR>
-nnoremap <F3> (:2ToggleTerm size=40 direction=float name=vs)<CR>
-tnoremap <F3> <C-\><C-n>(:2ToggleTerm size=40 direction=float name=vs)<CR>
-nnoremap <F5> :DiffviewOpen<CR>
-nnoremap <C-F5> :DiffviewClose<CR>
-nnoremap <A-F5> :DiffviewToggleFiles<CR>
-nnoremap ,/ :set wrap!<CR>
-
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true

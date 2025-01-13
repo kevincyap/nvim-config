@@ -1,5 +1,6 @@
 " We start by installing Vim plugin manager to manage plugins.
 " A Lot of customizations doen here.
+let s:using_snippets = 0
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -28,12 +29,15 @@ Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'github/copilot.vim'
 
 Plug 'folke/tokyonight.nvim'
-Plug 'sindrets/diffview.nvim'
 
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'folke/neodev.nvim'
+
+if s:using_snippets
+  Plug 'sirver/ultisnips'
+endif
 
 call plug#end()
 
@@ -114,9 +118,35 @@ let g:ale_linters = {
 \ 'cs': ['OmniSharp']
 \}
 
+" OmniSharp: {{{
+let g:OmniSharp_popup_position = 'peek'
+if has('nvim')
+  let g:OmniSharp_popup_options = {
+  \ 'winblend': 30,
+  \ 'winhl': 'Normal:Normal,FloatBorder:ModeMsg',
+  \ 'border': 'rounded'
+  \}
+else
+  let g:OmniSharp_popup_options = {
+  \ 'highlight': 'Normal',
+  \ 'padding': [0],
+  \ 'border': [1],
+  \ 'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
+  \ 'borderhighlight': ['ModeMsg']
+  \}
+endif
+let g:OmniSharp_popup_mappings = {
+\ 'sigNext': '<C-n>',
+\ 'sigPrev': '<C-p>',
+\ 'pageDown': ['<C-f>', '<PageDown>'],
+\ 'pageUp': ['<C-b>', '<PageUp>']
+\}
+
+if s:using_snippets
+  let g:OmniSharp_want_snippet = 1
+endif
+
 :source ~/AppData/Local/nvim/mappings.vim
 :source ~/AppData/Local/nvim/options.vim
 :luafile ~/AppData/Local/nvim/luastuff.lua
-
-command! -count=2 TermVS  lua require'toggleterm'.exec("cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64", <count>,40, "", "float", "vs", false,false)
-:2TermVS
+command! -count=2 TermVS  lua require'toggleterm'.exec('cmd.exe /k "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64', <count>, 40, "","float", "vs",false, false)

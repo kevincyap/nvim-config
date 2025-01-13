@@ -13,3 +13,6 @@
 let g:nerdtree_sync_cursorline = 1
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeWinSize=45
+let g:copilot_no_tab_map = v:true
+
+let g:OmniSharp_selector_findusages = 'fzf'
