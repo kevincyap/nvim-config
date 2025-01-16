@@ -59,7 +59,7 @@ local OProjComplete = function(ArgLead, CmdLine, CursorPos)
     local dirs = get_folders({"C:\\repos", "Q:\\src"})
     return dirs
 end
-vim.api.nvim_create_user_command("OP", OProjCallback, {
+vim.api.nvim_create_user_command("O", OProjCallback, {
     nargs = 1,
     complete = OProjComplete
 })

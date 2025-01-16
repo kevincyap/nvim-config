@@ -7,11 +7,6 @@
 nmap <C-L><C-L> :set norelativenumber<CR>
 map  <C-R><C-L> :set relativenumber<CR>
 
-if bufwinnr(1)
-  map + <C-W>f+
-  map - <C-W>-
-endif
-
 nnoremap ,sv :source ~/AppData/Local/nvim/init.vim<CR>
 nnoremap ,nvim :cd ~/AppData/Local/nvim/<CR>
 
@@ -66,6 +61,8 @@ function! s:myfzfbuffers(query, fullscreen)
     call fzf#vim#buffers(a:query, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
+let g:UltiSnipsListSnippets="<c-s>"
+let g:UltiSnipsExpandTrigger="<tab>"
 
 command! -bar -bang -nargs=? -complete=dir MyFzfBuffers call s:myfzfbuffers(<q-args>, <bang>0)
 ":map <C-n> :NERDTreeToggle<CR>
@@ -107,9 +104,14 @@ autocmd FileType cs nnoremap ,fu :OmniSharpFindUsages<CR>
 autocmd FileType cs nnoremap ,fi :OmniSharpFindImplementations<CR>
 autocmd FileType cs nnoremap ,<Space> :OmniSharpGetCodeActions<CR>
 autocmd FileType cs nnoremap ,fm :OmniSharpFindMembers<CR>
+autocmd FileType cs nnoremap ,sh :OmniSharpSignatureHelp<CR>
+autocmd FileType cs nnoremap <C-i> :OmniSharpDocumentation<CR>
 
 autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 
 "tmap <CM-q> <C-\><C-n><C-q>
 "noremap ,vsterm :terminal cmd.exe /k "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
+"
+nnoremap <CA-q> :bp<CR>
+nnoremap <CA-w> :bn<CR>

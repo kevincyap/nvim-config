@@ -1,6 +1,7 @@
 " We start by installing Vim plugin manager to manage plugins.
 " A Lot of customizations doen here.
-let s:using_snippets = 0
+let s:using_snippets = 1
+let g:OmniSharp_want_snippet=1
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -37,6 +38,7 @@ Plug 'folke/neodev.nvim'
 
 if s:using_snippets
   Plug 'sirver/ultisnips'
+  Plug 'honza/vim-snippets'
 endif
 
 call plug#end()
@@ -122,7 +124,6 @@ let g:ale_linters = {
 let g:OmniSharp_popup_position = 'peek'
 if has('nvim')
   let g:OmniSharp_popup_options = {
-  \ 'winblend': 30,
   \ 'winhl': 'Normal:Normal,FloatBorder:ModeMsg',
   \ 'border': 'rounded'
   \}
@@ -135,12 +136,6 @@ else
   \ 'borderhighlight': ['ModeMsg']
   \}
 endif
-let g:OmniSharp_popup_mappings = {
-\ 'sigNext': '<C-n>',
-\ 'sigPrev': '<C-p>',
-\ 'pageDown': ['<C-f>', '<PageDown>'],
-\ 'pageUp': ['<C-b>', '<PageUp>']
-\}
 
 if s:using_snippets
   let g:OmniSharp_want_snippet = 1
