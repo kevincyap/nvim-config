@@ -63,3 +63,7 @@ vim.api.nvim_create_user_command("O", OProjCallback, {
     nargs = 1,
     complete = OProjComplete
 })
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})

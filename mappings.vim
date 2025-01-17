@@ -105,7 +105,7 @@ autocmd FileType cs nnoremap ,fi :OmniSharpFindImplementations<CR>
 autocmd FileType cs nnoremap ,<Space> :OmniSharpGetCodeActions<CR>
 autocmd FileType cs nnoremap ,fm :OmniSharpFindMembers<CR>
 autocmd FileType cs nnoremap ,sh :OmniSharpSignatureHelp<CR>
-autocmd FileType cs nnoremap <C-i> :OmniSharpDocumentation<CR>
+autocmd FileType cs nnoremap ,sd :OmniSharpDocumentation<CR>
 
 autocmd FileType ts nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
