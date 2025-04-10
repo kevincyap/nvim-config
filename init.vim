@@ -1,5 +1,6 @@
 " We start by installing Vim plugin manager to manage plugins.
 " A Lot of customizations doen here.
+
 let s:using_snippets = 1
 let g:OmniSharp_want_snippet=1
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -35,6 +36,8 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'folke/neodev.nvim'
+
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 if s:using_snippets
   Plug 'sirver/ultisnips'
@@ -144,4 +147,3 @@ endif
 :source ~/AppData/Local/nvim/mappings.vim
 :source ~/AppData/Local/nvim/options.vim
 :luafile ~/AppData/Local/nvim/luastuff.lua
-command! -count=2 TermVS  lua require'toggleterm'.exec('cmd.exe /k "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64', <count>, 40, "","float", "vs",false, false)

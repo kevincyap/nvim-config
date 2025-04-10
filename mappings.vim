@@ -68,11 +68,12 @@ command! -bar -bang -nargs=? -complete=dir MyFzfBuffers call s:myfzfbuffers(<q-a
 ":map <C-n> :NERDTreeToggle<CR>
 map <C-p> :GFiles<CR>
 map <C-f> :Files<CR>
+map <CA-f> :RG<CR>
 map <C-b> :MyFzfBuffers<CR>
 map <C-l> :BLines<CR>
 map <CA-A> :Ag<CR>
 nmap <silent> <C-n> :call NERDTreeFindCurr()<CR>
-autocmd 
+autocmd
 
 "collapse json files by themselves.
 "map <C-j> :set filetype=json \| :syntax on \| :set foldmethod=syntax
@@ -86,17 +87,18 @@ map <C-t><up> :tabr<cr>
 map <C-t><down> :tabl<cr>
 map <C-t><left> :tabp<cr>
 map <C-t><right> :tabn<cr>
-
 nmap <A-d> "_dd
 nmap <CA-u> <C-d>zz
 nmap <C-u> <C-u>zz
 
 map <A-l> zL
 map <A-h> zH
+inoremap <F14> System.Diagnostics.Debugger.Launch();
 nnoremap <A-{> :lprevious<cr>
 nnoremap <A-}> :lnext<cr>
 nnoremap <CA-{> [{
 nnoremap <CA-}> ]}
+imap <C-BS> <C-W>
 
 " Supprot for different goto definitions for different file types.
 autocmd FileType cs nmap <silent> gd :OmniSharpGotoDefinition<CR>
@@ -115,3 +117,4 @@ autocmd FileType html nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR
 "
 nnoremap <CA-q> :bp<CR>
 nnoremap <CA-w> :bn<CR>
+map <C-F10> :bd<CR>

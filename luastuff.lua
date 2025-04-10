@@ -1,12 +1,44 @@
 
+vim.opt.termguicolors = true
+local inactive_bg = "#303030"
+local inactive_fg = "#e0e0e0"
+local visible_bg = "#e0e0e0"
+local visible_fg = "#404040"
+local selected_bg = "#f3f3f3"
+local selected_fg = "#000000"
+local background  = "#000000"
+local inactive_set = { fg = inactive_fg, bg = inactive_bg, }
+local visible_set = { fg = visible_fg, bg = visible_bg, }
+local active_set = { fg = selected_fg, bg = selected_bg, }
+require("bufferline").setup{options = {
+            themeable = true,
+            filename = "%:p",
+            show_buffer_close_icons = false,
+            show_tab_indicators = false,
+        },
+        highlights = {
+                background = inactive_set,
+                buffer_visible = visible_set,
+                buffer_selected = active_set,
+
+                indicator_selected = active_set,
+                indicator_visible = visible_set,
+
+                modified = { fg = '#ff0000', bg = inactive_bg, },
+                modified_visible = { fg = '#ff0000', bg = visible_bg, },
+                modified_selected = { fg = '#ff0000', bg = selected_bg, },
+
+                fill = { bg = background, }
+        }}
+
 local toggleTerm = require("toggleterm")
 toggleTerm.setup{
-    size = 40, 
+    size = 40,
     direction = 'float',
 }
-toggleTerm.exec('cmd.exe /k "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64', 2, 40, "","float", "vs",false, false)
+toggleTerm.exec('"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"', 2, 40, "","float", "vs",false, false)
 toggleTerm.exec('cls', 2, 40, "","float", "vs",false, false)
-toggleTerm.exec('cls', 1, 40, "","float", "main",false, false)
+toggleTerm.exec('powershell', 1, 40, "","float", "main",false, false)
 local Terminal  = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
@@ -31,7 +63,7 @@ vim.api.nvim_set_keymap("t", "<CA-q>", "<C-\\><C-n><C-W>q", {noremap = true, sil
 vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
           expr = true,
           replace_keycodes = false
-        }) 
+        })
 local function get_folders(paths)
     local folders = {}
     for _, path in ipairs(paths) do
@@ -52,16 +84,28 @@ local function get_folders(paths)
 end
 
 local OProjCallback = function(args)
-    local dir = args.fargs[1] or "C:\\repos" 
+    local dir = args.fargs[1] or "C:\\repos"
+    toggleTerm.exec('cd '..dir, 2, 40, "","float", "vs",false, false)
+    toggleTerm.exec('cls', 2, 40, "","float", "vs",false, false)
+
+    toggleTerm.exec('cd '..dir, 1, 40, "","float", "main",false, false)
+    toggleTerm.exec('cls', 1, 40, "","float", "main",false, false)
+
     vim.cmd("cd "..dir)
 end
 local OProjComplete = function(ArgLead, CmdLine, CursorPos)
     local dirs = get_folders({"C:\\repos", "Q:\\src"})
-    return dirs
+    local matchingDirs = {}
+    for _, dir in ipairs(dirs) do
+        if string.find(string.lower(dir), string.lower(ArgLead)) then
+            table.insert(matchingDirs, dir)
+        end
+    end
+    return matchingDirs
 end
 vim.api.nvim_create_user_command("O", OProjCallback, {
     nargs = 1,
-    complete = OProjComplete
+    complete = OProjComplete,
 })
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
