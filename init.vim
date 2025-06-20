@@ -3,6 +3,7 @@
 
 let s:using_snippets = 1
 let g:OmniSharp_want_snippet=1
+let g:OmniSharp_server_use_net6 = 1
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

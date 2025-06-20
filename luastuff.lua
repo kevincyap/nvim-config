@@ -84,7 +84,7 @@ local function get_folders(paths)
 end
 
 local OProjCallback = function(args)
-    local dir = args.fargs[1] or "C:\\repos"
+    local dir = args.fargs[1] or "Q:\\repos"
     toggleTerm.exec('cd '..dir, 2, 40, "","float", "vs",false, false)
     toggleTerm.exec('cls', 2, 40, "","float", "vs",false, false)
 
@@ -94,7 +94,7 @@ local OProjCallback = function(args)
     vim.cmd("cd "..dir)
 end
 local OProjComplete = function(ArgLead, CmdLine, CursorPos)
-    local dirs = get_folders({"C:\\repos", "Q:\\src"})
+    local dirs = get_folders({"Q:\\repos", "C:\\repos"})
     local matchingDirs = {}
     for _, dir in ipairs(dirs) do
         if string.find(string.lower(dir), string.lower(ArgLead)) then
