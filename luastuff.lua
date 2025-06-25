@@ -111,3 +111,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
 })
+
+--package.loaded['main_module'] = nil
+vim.keymap.set('i', '<F15>', function()
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local guid = require("main_module").generateGUID()
+    vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, { guid })
+end, { noremap = true, silent = true })
