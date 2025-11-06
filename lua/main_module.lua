@@ -10,5 +10,6 @@ function main_module.generateGUID()
     handle:close()
     return guid:gsub("%s+", "")  -- Remove any whitespace
 end
+
 return main_module
 

@@ -145,6 +145,8 @@ if s:using_snippets
   let g:OmniSharp_want_snippet = 1
 endif
 
+:hi Comment guifg=#ACACAC
+
 :source ~/AppData/Local/nvim/mappings.vim
 :source ~/AppData/Local/nvim/options.vim
 :luafile ~/AppData/Local/nvim/luastuff.lua
